@@ -26,20 +26,24 @@ function Glossary() {
 
   return (
     <table>
-      <header>
-        <th>Term</th>
-        <th>Definition</th>
-        <th>Source</th>
-      </header>
-      {terms.map((term) => (
-        <tr key={term.term}>
-          <td>{term.term}</td>
-          <td>{term.definition}</td>
-          <td>
-            <a href={term.source}>{term.source}</a>
-          </td>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Definition</th>
+          <th>Source</th>
         </tr>
-      ))}
+      </thead>
+      <tbody>
+        {terms.map((term) => (
+          <tr key={term.term}>
+            <td>{term.term}</td>
+            <td>{term.definition}</td>
+            <td>
+              <a href={term.source}>{term.source}</a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
 }
