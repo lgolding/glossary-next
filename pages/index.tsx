@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>Welcome to Glossary!</h1>
 
         <p className={styles.description}>
-          See the
+          See the&nbsp;
           <Link href="terms">
             <a>list of terms</a>
           </Link>
