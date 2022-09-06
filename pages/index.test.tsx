@@ -5,7 +5,7 @@ import Home from ".";
 describe("The home page", () => {
   it("contains a link to the glossary", () => {
     render(<Home />);
-    const glossaryLink = screen.getByRole("link", {
+    const glossaryLink: HTMLElement = screen.getByRole("link", {
       name: /list of terms/,
     });
     expect(glossaryLink).toBeInTheDocument();
