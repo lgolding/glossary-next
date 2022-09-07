@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Glossary from ".";
-import GlossaryEntry from "../models/GlossaryEntry";
+import Glossary from "../../pages/terms";
+import GlossaryEntry from "../../models/GlossaryEntry";
 
 const testData: GlossaryEntry[] = [
   {

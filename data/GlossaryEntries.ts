@@ -1,4 +1,4 @@
-import GlossaryEntry from "../pages/models/GlossaryEntry";
+import GlossaryEntry from "../models/GlossaryEntry";
 
 const data: GlossaryEntry[] = [
   {

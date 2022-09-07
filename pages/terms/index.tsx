@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import GlossaryEntry from "../models/GlossaryEntry";
+import GlossaryEntry from "../../models/GlossaryEntry";
 
 type GlossaryProps = {
   entries: GlossaryEntry[];
