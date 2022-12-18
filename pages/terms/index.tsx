@@ -19,9 +19,7 @@ const Glossary: FC<GlossaryProps> = ({ entries }) => (
         <tr key={entry.term}>
           <td>{entry.term}</td>
           <td>{entry.definition}</td>
-          <td>
-            <a href={entry.source}>{entry.source}</a>
-          </td>
+          <td>{entry.source && <a href={entry.source}>{entry.source}</a>}</td>
         </tr>
       ))}
     </tbody>
