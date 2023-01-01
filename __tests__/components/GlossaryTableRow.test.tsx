@@ -38,6 +38,35 @@ describe("GlossaryTableRow", () => {
     expect(termCell.innerHTML).toEqual('<a id="term"></a>term');
   });
 
+  it("sanitizes the term, definition, and link", () => {
+    const unsanitaryEntry: GlossaryEntry = {
+      term: "term<script src='evil.js'></script>",
+      definition: "def<script src='evil.js'></script>",
+      source: "<script src='evil.js'></script>https://www.example.com/term",
+    };
+
+    render(
+      <table>
+        <tbody>
+          <GlossaryTableRow entry={unsanitaryEntry} />
+        </tbody>
+      </table>
+    );
+
+    const row: HTMLElement = screen.getAllByRole("row")[0];
+
+    const termCell = row.children[0];
+    expect(termCell.innerHTML).toEqual('<a id="term"></a>term');
+
+    const definitionCell = row.children[1];
+    expect(definitionCell.innerHTML).toEqual("def");
+
+    const linkCell = row.children[2];
+    expect(linkCell.innerHTML).toEqual(
+      '<a href="https://www.example.com/term">https://www.example.com/term</a>'
+    );
+  });
+
   it("displays the definition in the second cell", () => {
     render(
       <table>
