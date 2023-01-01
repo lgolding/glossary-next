@@ -11,6 +11,11 @@ describe("GlossaryTableRow", () => {
     source: "https://www.example.com/term",
   };
 
+  // Indices for each column in the GlossaryTableRow.
+  const TERM_COLUMN = 0;
+  const DEFINITION_COLUMN = 1;
+  const LINK_COLUMN = 2;
+
   // A function that DRYs out the requirement that each test render the
   // GlossaryTableRow component within a table body. This is necessary
   // because GlossaryTableRow actually renders a <tr> element, which can
@@ -36,38 +41,15 @@ describe("GlossaryTableRow", () => {
     renderRow(entry);
 
     const row: HTMLElement = screen.getAllByRole("row")[0];
-    const termCell = row.children[0];
+    const termCell = row.children[TERM_COLUMN];
     expect(termCell.innerHTML).toEqual('<a id="term"></a>term');
-  });
-
-  it("sanitizes the term, definition, and link", () => {
-    const unsanitaryEntry: GlossaryEntry = {
-      term: "term<script src='evil.js'></script>",
-      definition: "def<script src='evil.js'></script>",
-      source: "<script src='evil.js'></script>https://www.example.com/term",
-    };
-
-    renderRow(unsanitaryEntry);
-
-    const row: HTMLElement = screen.getAllByRole("row")[0];
-
-    const termCell = row.children[0];
-    expect(termCell.innerHTML).toEqual('<a id="term"></a>term');
-
-    const definitionCell = row.children[1];
-    expect(definitionCell.innerHTML).toEqual("def");
-
-    const linkCell = row.children[2];
-    expect(linkCell.innerHTML).toEqual(
-      '<a href="https://www.example.com/term">https://www.example.com/term</a>'
-    );
   });
 
   it("displays the definition in the second cell", () => {
     renderRow(entry);
 
     const row: HTMLElement = screen.getAllByRole("row")[0];
-    const definitionCell = row.children[1];
+    const definitionCell = row.children[DEFINITION_COLUMN];
     expect(definitionCell.innerHTML).toEqual(entry.definition);
   });
 
@@ -75,7 +57,7 @@ describe("GlossaryTableRow", () => {
     renderRow(entry);
 
     const row: HTMLElement = screen.getAllByRole("row")[0];
-    const linkCell = row.children[2];
+    const linkCell = row.children[LINK_COLUMN];
     expect(linkCell.innerHTML).toEqual(
       `<a href="${entry.source}">${entry.source}</a>`
     );
@@ -90,7 +72,30 @@ describe("GlossaryTableRow", () => {
     renderRow(entryWithoutLink);
 
     const row: HTMLElement = screen.getAllByRole("row")[0];
-    const linkCell = row.children[2];
+    const linkCell = row.children[LINK_COLUMN];
     expect(linkCell.innerHTML).toEqual("");
+  });
+
+  it("sanitizes the term, definition, and link", () => {
+    const unsanitaryEntry: GlossaryEntry = {
+      term: "term<script src='evil.js'></script>",
+      definition: "def<script src='evil.js'></script>",
+      source: "<script src='evil.js'></script>https://www.example.com/term",
+    };
+
+    renderRow(unsanitaryEntry);
+
+    const row: HTMLElement = screen.getAllByRole("row")[0];
+
+    const termCell = row.children[TERM_COLUMN];
+    expect(termCell.innerHTML).toEqual('<a id="term"></a>term');
+
+    const definitionCell = row.children[DEFINITION_COLUMN];
+    expect(definitionCell.innerHTML).toEqual("def");
+
+    const linkCell = row.children[LINK_COLUMN];
+    expect(linkCell.innerHTML).toEqual(
+      '<a href="https://www.example.com/term">https://www.example.com/term</a>'
+    );
   });
 });
