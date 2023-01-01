@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Glossary from "../../pages/terms";
 import GlossaryEntry from "../../models/GlossaryEntry";
-import { link } from "fs";
 
 const testData: GlossaryEntry[] = [
   {
@@ -38,7 +37,9 @@ describe("The Glossary page", () => {
 
     // A term with a link.
     var termInfo = rows[2].children;
-    expect(termInfo[0].innerHTML).toEqual("microservice");
+    expect(termInfo[0].innerHTML).toEqual(
+      '<a id="microservice"></a>microservice'
+    );
     expect(termInfo[1].innerHTML.startsWith("One of a set")).toEqual(true);
     var linkCell = termInfo[2];
     var linkElement = linkCell.children[0];
@@ -47,7 +48,7 @@ describe("The Glossary page", () => {
 
     // A term without a link.
     termInfo = rows[3].children;
-    expect(termInfo[0].innerHTML).toEqual("patching");
+    expect(termInfo[0].innerHTML).toEqual('<a id="patching"></a>patching');
     linkCell = termInfo[2];
     expect(linkCell.children.length).toBe(0);
   });

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import GlossaryEntry from "../../models/GlossaryEntry";
+import { sanitize } from "../../utilities/htmlUtilities";
 
 type GlossaryProps = {
   entries: GlossaryEntry[];
@@ -15,13 +16,20 @@ const Glossary: FC<GlossaryProps> = ({ entries }) => (
       </tr>
     </thead>
     <tbody>
-      {entries.map((entry) => (
-        <tr key={entry.term}>
-          <td>{entry.term}</td>
-          <td>{entry.definition}</td>
-          <td>{entry.source && <a href={entry.source}>{entry.source}</a>}</td>
-        </tr>
-      ))}
+      {entries.map((entry) => {
+        const term = sanitize(entry.term);
+        const source = entry.source && sanitize(entry.source);
+        return (
+          <tr key={term}>
+            <td>
+              <a id={term} />
+              {term}
+            </td>
+            <td>{sanitize(entry.definition)}</td>
+            <td>{entry.source && <a href={source}>{source}</a>}</td>
+          </tr>
+        );
+      })}
     </tbody>
   </table>
 );
