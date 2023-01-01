@@ -9,7 +9,7 @@ type GlossaryTableRowProps = {
 const GlossaryTableRow: FC<GlossaryTableRowProps> = ({ entry }) => {
   const rowData = new GlossaryRowData(entry);
   return (
-    <tr key={rowData.key}>
+    <tr>
       <td>
         <a id={rowData.term}></a>
         {rowData.term}

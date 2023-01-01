@@ -1,4 +1,5 @@
 import { FC } from "react";
+import GlossaryTableRow from "../../components/GlossaryTableRow";
 import GlossaryEntry from "../../models/GlossaryEntry";
 import GlossaryRowData from "../../models/GlossaryRowData";
 
@@ -6,8 +7,6 @@ type GlossaryProps = {
   entries: GlossaryEntry[];
 };
 
-// TODO: Extract the row into a GlossaryRow component with a GlossaryEntry property;
-// in internally constructs the GlossaryRowData.
 const Glossary: FC<GlossaryProps> = ({ entries }) => (
   <table>
     <thead>
@@ -18,19 +17,9 @@ const Glossary: FC<GlossaryProps> = ({ entries }) => (
       </tr>
     </thead>
     <tbody>
-      {entries.map((entry) => {
-        const rowData = new GlossaryRowData(entry);
-        return (
-          <tr key={rowData.key}>
-            <td>
-              <a id={rowData.term}></a>
-              {rowData.term}
-            </td>
-            <td>{rowData.definition}</td>
-            <td>{rowData.sourceLink && <a>{rowData.sourceLink}</a>}</td>
-          </tr>
-        );
-      })}
+      {entries.map((entry) => (
+        <GlossaryTableRow entry={entry} key={entry.term} />
+      ))}
     </tbody>
   </table>
 );
