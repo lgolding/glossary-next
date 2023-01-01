@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Home from "../pages";
+import Home from "../../pages/index";
 
 describe("The home page", () => {
   it("contains a link to the glossary", () => {

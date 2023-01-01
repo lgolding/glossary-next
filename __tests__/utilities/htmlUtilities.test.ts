@@ -1,4 +1,4 @@
-import { sanitize } from "../htmlUtilities";
+import { sanitize } from "../../utilities/htmlUtilities";
 
 describe("sanitize", () => {
   it("removes <script> tags", () => {
