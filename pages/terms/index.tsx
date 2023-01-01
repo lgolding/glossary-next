@@ -1,7 +1,6 @@
 import { FC } from "react";
 import GlossaryTableRow from "../../components/GlossaryTableRow";
 import GlossaryEntry from "../../models/GlossaryEntry";
-import GlossaryRowData from "../../models/GlossaryRowData";
 
 type GlossaryProps = {
   entries: GlossaryEntry[];
