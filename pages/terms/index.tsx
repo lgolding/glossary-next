@@ -2,11 +2,11 @@ import { FC, Fragment } from "react";
 import GlossaryTable from "../../components/GlossaryTable";
 import GlossaryEntry from "../../models/GlossaryEntry";
 
-type GlossaryProps = {
+type GlossaryTableProps = {
   entries: GlossaryEntry[];
 };
 
-const Glossary: FC<GlossaryProps> = ({ entries }) => (
+const Glossary: FC<GlossaryTableProps> = ({ entries }) => (
   <Fragment>
     <h1>Glossary</h1>
     <GlossaryTable entries={entries} />
