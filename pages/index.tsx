@@ -18,7 +18,7 @@ const Home: NextPage = () => {
 
         <p className={styles.description}>
           See the&nbsp;
-          <Link href="terms">
+          <Link href="glossary">
             <a>list of terms</a>
           </Link>
           .
