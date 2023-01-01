@@ -15,7 +15,11 @@ const GlossaryTableRow: FC<GlossaryTableRowProps> = ({ entry }) => {
         {rowData.term}
       </td>
       <td>{rowData.definition}</td>
-      <td>{rowData.sourceLink && <a>{rowData.sourceLink}</a>}</td>
+      <td>
+        {rowData.sourceLink && (
+          <a href={rowData.sourceLink}>{rowData.sourceLink}</a>
+        )}
+      </td>
     </tr>
   );
 };

@@ -63,7 +63,9 @@ describe("GlossaryTableRow", () => {
 
     const row: HTMLElement = screen.getAllByRole("row")[0];
     const linkCell = row.children[2];
-    expect(linkCell.innerHTML).toEqual(`<a>${entry.source}</a>`);
+    expect(linkCell.innerHTML).toEqual(
+      `<a href="${entry.source}">${entry.source}</a>`
+    );
   });
 
   it("leaves the third cell blank if the link is absent", () => {
