@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Glossary from "../../../pages/terms/index";
+import Glossary from "../../../pages/glossary/index";
 import testData from "../../../data/GlossaryEntries";
 
 describe("The Glossary page", () => {
