@@ -1,11 +1,13 @@
 import { FC } from "react";
 import GlossaryEntry from "../../models/GlossaryEntry";
-import { sanitize } from "../../utilities/htmlUtilities";
+import GlossaryRowData from "../../models/GlossaryRowData";
 
 type GlossaryProps = {
   entries: GlossaryEntry[];
 };
 
+// TODO: Extract the row into a GlossaryRow component with a GlossaryEntry property;
+// in internally constructs the GlossaryRowData.
 const Glossary: FC<GlossaryProps> = ({ entries }) => (
   <table>
     <thead>
@@ -17,16 +19,15 @@ const Glossary: FC<GlossaryProps> = ({ entries }) => (
     </thead>
     <tbody>
       {entries.map((entry) => {
-        const term = sanitize(entry.term);
-        const source = entry.source && sanitize(entry.source);
+        const rowData = new GlossaryRowData(entry);
         return (
-          <tr key={term}>
+          <tr key={rowData.key}>
             <td>
-              <a id={term} />
-              {term}
+              <a id={rowData.term}></a>
+              {rowData.term}
             </td>
-            <td>{sanitize(entry.definition)}</td>
-            <td>{entry.source && <a href={source}>{source}</a>}</td>
+            <td>{rowData.definition}</td>
+            <td>{rowData.sourceLink && <a>{rowData.sourceLink}</a>}</td>
           </tr>
         );
       })}
