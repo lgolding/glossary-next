@@ -1,17 +1,21 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import GlossaryTableRow from "../../components/GlossaryTableRow";
-import testData from "../../data/GlossaryEntries";
 import GlossaryEntry from "../../models/GlossaryEntry";
 
 describe("GlossaryTableRow", () => {
+  // A glossary entry used in most but not all of these tests.
   const entry: GlossaryEntry = {
     term: "term",
     definition: "def",
     source: "https://www.example.com/term",
   };
 
-  it("renders a single table row", () => {
+  // A function that DRYs out the requirement that each test render the
+  // GlossaryTableRow component within a table body. This is necessary
+  // because GlossaryTableRow actually renders a <tr> element, which can
+  // only occur in a <tbody>, which in turn can only occur in a <table>.
+  function renderRow(entry: GlossaryEntry) {
     render(
       <table>
         <tbody>
@@ -19,19 +23,17 @@ describe("GlossaryTableRow", () => {
         </tbody>
       </table>
     );
+  }
+
+  it("renders a single table row", () => {
+    renderRow(entry);
 
     const rows: HTMLElement[] = screen.getAllByRole("row");
     expect(rows.length).toBe(1);
   });
 
   it("displays the term with an anchor tag in the first cell", () => {
-    render(
-      <table>
-        <tbody>
-          <GlossaryTableRow entry={entry} />
-        </tbody>
-      </table>
-    );
+    renderRow(entry);
 
     const row: HTMLElement = screen.getAllByRole("row")[0];
     const termCell = row.children[0];
@@ -45,13 +47,7 @@ describe("GlossaryTableRow", () => {
       source: "<script src='evil.js'></script>https://www.example.com/term",
     };
 
-    render(
-      <table>
-        <tbody>
-          <GlossaryTableRow entry={unsanitaryEntry} />
-        </tbody>
-      </table>
-    );
+    renderRow(unsanitaryEntry);
 
     const row: HTMLElement = screen.getAllByRole("row")[0];
 
@@ -68,13 +64,7 @@ describe("GlossaryTableRow", () => {
   });
 
   it("displays the definition in the second cell", () => {
-    render(
-      <table>
-        <tbody>
-          <GlossaryTableRow entry={entry} />
-        </tbody>
-      </table>
-    );
+    renderRow(entry);
 
     const row: HTMLElement = screen.getAllByRole("row")[0];
     const definitionCell = row.children[1];
@@ -82,13 +72,7 @@ describe("GlossaryTableRow", () => {
   });
 
   it("displays the source link in the third cell", () => {
-    render(
-      <table>
-        <tbody>
-          <GlossaryTableRow entry={entry} />
-        </tbody>
-      </table>
-    );
+    renderRow(entry);
 
     const row: HTMLElement = screen.getAllByRole("row")[0];
     const linkCell = row.children[2];
@@ -103,13 +87,7 @@ describe("GlossaryTableRow", () => {
       definition: "def",
     };
 
-    render(
-      <table>
-        <tbody>
-          <GlossaryTableRow entry={entryWithoutLink} />
-        </tbody>
-      </table>
-    );
+    renderRow(entryWithoutLink);
 
     const row: HTMLElement = screen.getAllByRole("row")[0];
     const linkCell = row.children[2];
