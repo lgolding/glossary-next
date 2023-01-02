@@ -1,6 +1,8 @@
 import { FC } from "react";
 import GlossaryEntry from "../models/GlossaryEntry";
 import GlossaryRowData from "../models/GlossaryRowData";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
 
 type GlossaryTableRowProps = {
   entry: GlossaryEntry;
@@ -9,18 +11,18 @@ type GlossaryTableRowProps = {
 const GlossaryTableRow: FC<GlossaryTableRowProps> = ({ entry }) => {
   const rowData = new GlossaryRowData(entry);
   return (
-    <tr>
-      <td>
+    <TableRow>
+      <TableCell>
         <a id={rowData.term}></a>
         {rowData.term}
-      </td>
-      <td>{rowData.definition}</td>
-      <td>
+      </TableCell>
+      <TableCell>{rowData.definition}</TableCell>
+      <TableCell>
         {rowData.sourceLink && (
           <a href={rowData.sourceLink}>{rowData.sourceLink}</a>
         )}
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 };
 
