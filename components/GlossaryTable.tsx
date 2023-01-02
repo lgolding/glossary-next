@@ -17,7 +17,7 @@ type GlossaryProps = {
 
 const GlossaryTable: FC<GlossaryProps> = ({ entries }) => (
   <TableContainer sx={{ maxWidth: 800, margin: 2 }} component={Paper}>
-    <Table aria-role="simple table">
+    <Table>
       <TableHead>
         <TableRow>
           <TableCell>Term</TableCell>
