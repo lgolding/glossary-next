@@ -12,7 +12,6 @@ const Glossary: FC<GlossaryTableProps> = ({ entries }) => (
   <Fragment>
     <Head>
       <title>List of terms</title>
-      <link rel="icon" href="/favicon.ico" />
     </Head>
     <Typography variant="h1">Glossary</Typography>
     <GlossaryTable entries={entries} />
