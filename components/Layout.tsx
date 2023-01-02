@@ -1,11 +1,34 @@
 import Image from "next/image";
-import { Typography } from "@mui/material";
+import { useRouter } from "next/router";
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import { Home } from "@mui/icons-material";
 import { FC, Fragment, ReactNode } from "react";
 import styles from "../styles/Home.module.css";
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
+  const router = useRouter();
   return (
     <Fragment>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            title="Home"
+            sx={{ mr: 2 }}
+            onClick={() => {
+              router.push("/");
+            }}
+          >
+            <Home />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Glossary
+          </Typography>
+        </Toolbar>
+      </AppBar>
       {children}
 
       <footer className={styles.footer}>
