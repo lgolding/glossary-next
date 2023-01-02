@@ -1,8 +1,7 @@
 import { FC } from "react";
 import GlossaryEntry from "../models/GlossaryEntry";
 import GlossaryRowData from "../models/GlossaryRowData";
-import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
+import { TableCell, TableRow } from "@mui/material";
 
 type GlossaryTableRowProps = {
   entry: GlossaryEntry;

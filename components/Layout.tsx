@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Typography from "@mui/material/Typography";
+import { Typography } from "@mui/material";
 import { FC, Fragment, ReactNode } from "react";
 import styles from "../styles/Home.module.css";
 
