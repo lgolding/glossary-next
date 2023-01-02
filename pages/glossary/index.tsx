@@ -1,6 +1,8 @@
 import { FC, Fragment } from "react";
 import GlossaryTable from "../../components/GlossaryTable";
 import GlossaryEntry from "../../models/GlossaryEntry";
+import Head from "next/head";
+import Typography from "@mui/material/Typography";
 
 type GlossaryTableProps = {
   entries: GlossaryEntry[];
@@ -8,7 +10,11 @@ type GlossaryTableProps = {
 
 const Glossary: FC<GlossaryTableProps> = ({ entries }) => (
   <Fragment>
-    <h1>Glossary</h1>
+    <Head>
+      <title>List of terms</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+    <Typography variant="h1">Glossary</Typography>
     <GlossaryTable entries={entries} />
   </Fragment>
 );
