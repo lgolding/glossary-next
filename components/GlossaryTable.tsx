@@ -1,26 +1,31 @@
 import { FC } from "react";
 import GlossaryTableRow from "./GlossaryTableRow";
 import GlossaryEntry from "../models/GlossaryEntry";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
 
 type GlossaryProps = {
   entries: GlossaryEntry[];
 };
 
 const GlossaryTable: FC<GlossaryProps> = ({ entries }) => (
-  <table>
-    <thead>
-      <tr>
-        <th>Term</th>
-        <th>Definition</th>
-        <th>Source</th>
-      </tr>
-    </thead>
-    <tbody>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Term</TableCell>
+        <TableCell>Definition</TableCell>
+        <TableCell>Source</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
       {entries.map((entry) => (
         <GlossaryTableRow entry={entry} key={entry.term} />
       ))}
-    </tbody>
-  </table>
+    </TableBody>
+  </Table>
 );
 
 export default GlossaryTable;
