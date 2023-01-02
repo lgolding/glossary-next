@@ -2,7 +2,8 @@ import { FC, Fragment } from "react";
 import GlossaryTable from "../../components/GlossaryTable";
 import GlossaryEntry from "../../models/GlossaryEntry";
 import Head from "next/head";
-import { Box, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 type GlossaryTableProps = {
   entries: GlossaryEntry[];

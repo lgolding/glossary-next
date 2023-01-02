@@ -1,8 +1,11 @@
+import { FC, Fragment, ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
-import { Home } from "@mui/icons-material";
-import { FC, Fragment, ReactNode } from "react";
+import AppBar from "@mui/material/AppBar";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Home from "@mui/icons-material/Home";
 import styles from "../styles/Home.module.css";
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
