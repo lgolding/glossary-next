@@ -20,11 +20,35 @@ const data: GlossaryEntry[] = [
   },
 ];
 
+const INVALID_ENTRY = "Invalid glossary entry: not added to glossary.";
+
+function addEntry(requestBody: any) {
+  if (
+    typeof requestBody.term !== "string" ||
+    typeof requestBody.definition !== "string" ||
+    (typeof requestBody.source !== "string" &&
+      typeof requestBody.source !== "undefined")
+  ) {
+    throw new Error(INVALID_ENTRY);
+  }
+
+  const term = requestBody.term as string;
+  const definition = requestBody.definition as string;
+  const source = requestBody.source as string | undefined;
+  data.push({ term, definition, source });
+  console.log(data);
+}
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
     res.status(200).setHeader("Content-Type", "application/json").json(data);
   } else if (req.method === "POST") {
-    res.status(400).end();
+    try {
+      addEntry(req.body);
+      res.status(201).end("Term added to glossary.");
+    } catch (err) {
+      res.status(400).end(`${err}`);
+    }
   } else {
     res
       .status(405)

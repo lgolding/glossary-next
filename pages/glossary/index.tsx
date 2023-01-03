@@ -26,7 +26,7 @@ const Glossary: FC<GlossaryTableProps> = ({ entries }) => (
 
 export default Glossary;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   try {
     const { data, status } = await axios.get<GlossaryEntry[]>(
       "http://localhost:3000/api/term",
