@@ -1,4 +1,5 @@
 import { FC, Fragment } from "react";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import GlossaryTable from "../../components/GlossaryTable";
 import GlossaryEntry from "../../models/GlossaryEntry";
 import Head from "next/head";
@@ -26,13 +27,33 @@ const Glossary: FC<GlossaryTableProps> = ({ entries }) => (
 export default Glossary;
 
 export async function getStaticProps() {
-  // TODO: Get it from an API call.
-  const data: { default: GlossaryEntry[] } = await import(
-    "../../data/GlossaryEntries"
-  );
-  return {
-    props: {
-      entries: data.default,
-    },
-  };
+  try {
+    const { data, status } = await axios.get<GlossaryEntry[]>(
+      "http://localhost:3000/api/term",
+      {
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+
+    return {
+      props: {
+        entries: data,
+      },
+    };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError;
+      console.error(axiosError.message);
+    } else {
+      console.error(`Unexpected error: ${error}`);
+    }
+
+    return {
+      props: {
+        entries: [],
+      },
+    };
+  }
 }
