@@ -23,6 +23,8 @@ const data: GlossaryEntry[] = [
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
     res.status(200).setHeader("Content-Type", "application/json").json(data);
+  } else if (req.method === "POST") {
+    res.status(400).end();
   } else {
     res
       .status(405)
