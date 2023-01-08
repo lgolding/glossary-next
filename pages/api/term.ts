@@ -12,7 +12,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       .json(allTerms);
   } else if (req.method === "POST") {
     try {
-      termRepository.addEntry(req.body);
+      termRepository.addEntry(req.body.term, req.body.definition);
       res.status(201).end("Term added to glossary.");
     } catch (err) {
       res.status(400).end(`${err}`);

@@ -26,19 +26,8 @@ export default class TermRepository {
     return data;
   }
 
-  addEntry(requestBody: any) {
-    if (
-      typeof requestBody.term !== "string" ||
-      typeof requestBody.definition !== "string" ||
-      (typeof requestBody.source !== "string" &&
-        typeof requestBody.source !== "undefined")
-    ) {
-      throw new Error(INVALID_ENTRY);
-    }
-
-    const term = requestBody.term as string;
-    const definition = requestBody.definition as string;
-    const source = requestBody.source as string | undefined;
+  addEntry(term: string, definition: string, source?: string) {
+    console.log(term, definition, source);
     data.push({ term, definition, source });
     console.log(data);
   }
