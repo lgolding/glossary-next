@@ -37,7 +37,10 @@ describe("InMemoryTermRepository", () => {
       repository = new InMemoryTermRepository();
     });
 
-    it("adds a term with a source", () => {
+    // These two tests exercise the happy path and the error path for adding valid
+    // and invalid terms. For coverage of what makes a valid or invalid term, see
+    // GlossaryEntry.test.ts.
+    it("adds a valid term", () => {
       repository!.addEntry("t", "d", "s");
       const entries: GlossaryEntry[] = repository!.getAll();
       const newEntry = entries[entries.length - 1];
@@ -46,29 +49,8 @@ describe("InMemoryTermRepository", () => {
       expect(newEntry.source).toBe("s");
     });
 
-    it("adds a term without a source", () => {
-      repository!.addEntry("t", "d");
-      const entries: GlossaryEntry[] = repository!.getAll();
-      const newEntry = entries[entries.length - 1];
-      expect(newEntry.term).toBe("t");
-      expect(newEntry.definition).toBe("d");
-      expect(newEntry.source).toBeUndefined();
-    });
-
-    it("requires a non-empty term", () => {
+    it("throws when attempting to add an invalid term", () => {
       expect(() => repository!.addEntry("", "d", "s")).toThrow();
-    });
-
-    it("requires a non-whitespace term", () => {
-      expect(() => repository!.addEntry("\t  \n\r", "d", "s")).toThrow();
-    });
-
-    it("requires a non-empty definition", () => {
-      expect(() => repository!.addEntry("t", "", "s")).toThrow();
-    });
-
-    it("requires a non-whitespace definition", () => {
-      expect(() => repository!.addEntry("t", "\t  \n\r", "s")).toThrow();
     });
   });
 });

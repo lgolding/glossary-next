@@ -1,8 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import GlossaryEntry from "../../models/GlossaryEntry";
+import InMemoryTermRepository from "../../repositories/InMemoryTermRepository";
 import TermRepository from "../../repositories/TermRepository";
 
-const termRepository = new TermRepository();
+const termRepository: TermRepository = new InMemoryTermRepository();
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
     const allTerms: GlossaryEntry[] = termRepository.getAll();
