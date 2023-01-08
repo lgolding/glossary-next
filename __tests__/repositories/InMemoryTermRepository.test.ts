@@ -29,4 +29,46 @@ describe("InMemoryTermRepository", () => {
       expect(entries[2].source).toBeUndefined();
     });
   });
+
+  describe("add", () => {
+    var repository: InMemoryTermRepository | undefined;
+
+    beforeEach(() => {
+      repository = new InMemoryTermRepository();
+    });
+
+    it("adds a term with a source", () => {
+      repository!.addEntry("t", "d", "s");
+      const entries: GlossaryEntry[] = repository!.getAll();
+      const newEntry = entries[entries.length - 1];
+      expect(newEntry.term).toBe("t");
+      expect(newEntry.definition).toBe("d");
+      expect(newEntry.source).toBe("s");
+    });
+
+    it("adds a term without a source", () => {
+      repository!.addEntry("t", "d");
+      const entries: GlossaryEntry[] = repository!.getAll();
+      const newEntry = entries[entries.length - 1];
+      expect(newEntry.term).toBe("t");
+      expect(newEntry.definition).toBe("d");
+      expect(newEntry.source).toBeUndefined();
+    });
+
+    it("requires a non-empty term", () => {
+      expect(() => repository!.addEntry("", "d", "s")).toThrow();
+    });
+
+    it("requires a non-whitespace term", () => {
+      expect(() => repository!.addEntry("\t  \n\r", "d", "s")).toThrow();
+    });
+
+    it("requires a non-empty definition", () => {
+      expect(() => repository!.addEntry("t", "", "s")).toThrow();
+    });
+
+    it("requires a non-whitespace definition", () => {
+      expect(() => repository!.addEntry("t", "\t  \n\r", "s")).toThrow();
+    });
+  });
 });

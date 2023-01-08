@@ -30,8 +30,18 @@ export default class InMemoryTermRepository implements TermRepository {
   }
 
   addEntry(term: string, definition: string, source?: string) {
-    console.log(term, definition, source);
+    // TODO: The validation should happen for all repositories, not just in-memory.
+    // Move it to the GlossaryEntry constructor.
+    term = term.trim();
+    if (term.length === 0) {
+      throw new Error("addEntry: cannot add a blank term to the glossary");
+    }
+    definition = definition.trim();
+    if (definition.length === 0) {
+      throw new Error(
+        "addEntry: cannot add a term with a blank definition to the glossary"
+      );
+    }
     data.push({ term, definition, source });
-    console.log(data);
   }
 }
