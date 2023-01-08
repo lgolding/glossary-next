@@ -2,14 +2,14 @@ import GlossaryEntry from "../../models/GlossaryEntry";
 
 describe("GlossaryEntry", () => {
   describe("constructor", () => {
-    it("create a term with a source", () => {
+    it("creates a term with a source", () => {
       var newEntry = new GlossaryEntry("t", "d", "s");
       expect(newEntry.term).toBe("t");
       expect(newEntry.definition).toBe("d");
       expect(newEntry.source).toBe("s");
     });
 
-    it("create a term without a source", () => {
+    it("creates a term without a source", () => {
       var newEntry = new GlossaryEntry("t", "d");
       expect(newEntry.term).toBe("t");
       expect(newEntry.definition).toBe("d");
