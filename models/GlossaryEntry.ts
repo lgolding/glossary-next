@@ -1,9 +1,9 @@
 class GlossaryEntry {
-  term: string;
-  definition: string;
-  source?: string;
-
-  constructor(term: string, definition: string, source?: string) {
+  constructor(
+    public readonly term: string,
+    public readonly definition: string,
+    public readonly source?: string
+  ) {
     term = term.trim();
     if (term.length === 0) {
       throw new Error("addEntry: cannot add a blank term to the glossary");
